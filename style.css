@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  background-color: bisque;
+}
+.container {
+  margin: 100px auto;
+  position: relative;
+  width: 400px;
+  height: 250px;
+  background-color: #ddd;
+  border-radius: 10px;
+}
+.home {
+  position: absolute;
+  top: -48px;
+  right: 4px;
+  background-color: #e4e4e4;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  vertical-align: bottom;
+}
+.home a {
+  display: block;
+  text-decoration: none;
+  color: #0a0a0a;
+  font-size: 24px;
+  text-align: center;
+  line-height: 32px;
+}
+.home span {
+  line-height: 32px;
+}
+.text {
+  position: absolute;
+  top: 8px;
+  right: -12px;
+  font-size: 12px;
+  width: 80px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none; 
+}
+.home:hover .text {
+  opacity: 1;
+}
+.home:hover span {
+  opacity: 0.3;
+}
+.restart {
+  position: absolute;
+  top: -48px;
+  left: 4px;
+  background-color: #e4e4e4;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  vertical-align: bottom;
+}
+.restart a {
+  display: block;
+  text-decoration: none;
+  color: #0a0a0a;
+  font-size: 24px;
+  text-align: center;
+  line-height: 32px;
+}
+.restart span {
+  line-height: 32px;
+}
+.replay {
+  position: absolute;
+  top: 8px;
+  left: -4px;
+  font-size: 12px;
+  width: 80px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none; 
+}
+.restart:hover .replay {
+  opacity: 1;
+}
+.restart:hover span {
+  opacity: 0.3;
+}
+
+#guest {
+  position: absolute;
+  bottom: 25px;
+  left: 250px;
+  transition: transform 0.7s;
+}
+.adult {
+  width: 35px;
+  height: 65px;
+}
+.kid {
+  width: 25px;
+  height: 50px;
+}
+.gohst {
+  width: 30px;
+  height: 65px;
+}
+.animal {
+  width: 30px;
+  height: 50px;
+}
+#guest.getin {
+  transform: translate(-200px, -15px);
+}
+#bus {
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  width: 200px;
+  height: 100px;
+  transform: rotateY(180deg);
+  transition: transform 0.7s, opacity 0.7s ease-in-out;
+}
+.busstop {
+  position: absolute;
+  bottom: 30px;
+  left: 200px;
+  width: 50px;
+  height: 80px;
+}
+#bus.flamein {
+  transform: rotateY(180deg) translateX(210px);
+  opacity: 0;
+}
+#bus.flameout {
+  transform: rotateY(180deg) translateX(-400px);
+  opacity: 0;
+}
+#bus.hidden {
+  opacity: 0;
+}
+#question {
+  font-weight: bold;
+  margin: 16px;
+  padding-top: 16px;
+}
+#result {
+  display: none;
+}
+#result.show {
+  display: block;
+}
+#answerboard {
+  display: flex;
+  margin: 32px auto;
+  width: 380px;
+  height: 120px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+}
+#answerboard div {
+  background-color: ghostwhite;
+  border-radius: 4px;
+  width: 70px;
+  height: 48px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 48px;
+  font-size: 20px;
+  z-index: 3;
+}
