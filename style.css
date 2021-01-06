@@ -5,7 +5,7 @@ body {
 .container {
   margin: 100px auto;
   position: relative;
-  width: 400px;
+  width: 315px;
   height: 250px;
   background-color: #ddd;
   border-radius: 10px;
@@ -88,50 +88,46 @@ body {
 #guest {
   position: absolute;
   bottom: 25px;
-  left: 250px;
+  left: 185px;
   transition: transform 0.7s;
+  z-index: 1;
 }
 .adult {
   width: 35px;
-  height: 65px;
+  height: 68px;
 }
 .kid {
-  width: 25px;
-  height: 50px;
+  width: 20px;
+  height: 45px;
 }
-.gohst {
-  width: 30px;
-  height: 65px;
-}
-.animal {
-  width: 30px;
-  height: 50px;
-}
+
 #guest.getin {
-  transform: translate(-200px, -15px);
+  transform: translate(-150px, -15px);
 }
 #bus {
   position: absolute;
   bottom: 30px;
   left: 10px;
-  width: 200px;
+  width: 150px;
   height: 100px;
   transform: rotateY(180deg);
   transition: transform 0.7s, opacity 0.7s ease-in-out;
+  z-index: 2;
 }
 .busstop {
   position: absolute;
   bottom: 30px;
-  left: 200px;
+  left: 150px;
   width: 50px;
   height: 80px;
+  z-index: 3;
 }
 #bus.flamein {
-  transform: rotateY(180deg) translateX(210px);
+  transform: rotateY(180deg) translateX(80px);
   opacity: 0;
 }
 #bus.flameout {
-  transform: rotateY(180deg) translateX(-400px);
+  transform: rotateY(180deg) translateX(-185px);
   opacity: 0;
 }
 #bus.hidden {
@@ -151,7 +147,7 @@ body {
 #answerboard {
   display: flex;
   margin: 32px auto;
-  width: 380px;
+  width: 280px;
   height: 120px;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -160,11 +156,63 @@ body {
 #answerboard div {
   background-color: ghostwhite;
   border-radius: 4px;
-  width: 70px;
-  height: 48px;
+  width: 50px;
+  height: 32px;
   cursor: pointer;
   text-align: center;
-  line-height: 48px;
+  line-height: 32px;
   font-size: 20px;
-  z-index: 3;
+  z-index: 5;
+}
+@media (min-width: 400px) {
+  .container {
+    width: 400px;
+    height: 250px;
+  }
+  #guest {
+    left: 250px;
+  }
+  .adult {
+    width: 40px;
+    height: 70px;
+  }
+  .kid {
+    width: 25px;
+    height: 50px;
+  }
+  #guest.getin {
+    transform: translate(-200px, -15px);
+  }
+  #bus {
+    left: 10px;
+    width: 200px;
+    height: 100px;
+  }
+  .busstop {
+    left: 200px;
+    width: 50px;
+    height: 80px;
+  }
+  #bus.flamein {
+    transform: rotateY(180deg) translateX(110px);
+    opacity: 0;
+  }
+  #bus.flameout {
+    transform: rotateY(180deg) translateX(-250px);
+    opacity: 0;
+  }
+  #result.show {
+    display: block;
+  }
+  #answerboard {
+    margin: 32px auto;
+    width: 380px;
+    height: 120px;
+  }
+  #answerboard div {
+    width: 70px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 20px;
+  }
 }

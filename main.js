@@ -6,42 +6,39 @@
   const result = document.getElementById('result');
   const question = document.getElementById('question');
   const answerboard = document.getElementById('answerboard');
-  const adultImgs = ["img/man1.png", "img/man2.png", "img/man3.png", "img/woman1.png", "img/woman2.png"];
-  const kidImgs = ["img/boy1.png", "img/boy2.png", "img/boy3.png", "img/girl1.png", "img/girl2.png"];
-  const gohstImgs = ["img/amabie.png", "img/franken.png", "img/miiraotoko.png", "img/kappa.png", "img/tengu.png"];
-  const animalImgs = ["img/dog1.png", "img/dog2.png", "img/horse.png", "img/nihonjika.png", "img/pronghorn.png"];
-  const guestClass = ["adult", "kid", "gohst", "animal"];
+  const manImgs = ["img/man1.png", "img/man2.png", "img/man3.png", "img/man4.png", "img/man5.png"];
+  const womanImgs = ["img/woman1.png", "img/woman2.png", "img/woman3.png", "img/woman4.png", "img/woman5.png"];
+  const boyImgs = ["img/boy1.png", "img/boy2.png", "img/boy3.png", "img/boy4.png", "img/boy5.png"];
+  const girlImgs = ["img/girl1.png", "img/girl2.png", "img/girl3.png", "img/girl4.png", "img/girl5.png"];
+  
+  const guestClass = ["adult", "adult", "kid", "kid"];
   let correctCount = 0;
   let wrongCount = 0;
   let isGaming = false;
-  const questions = [
-    {c: "人", q: "人間"},
-    {c: "匹", q: "妖怪"},
-    {c: "頭", q: "動物"},
-  ];
+  const questions = ["大人", "子供"];
   function getRandomImg(imgs) {
     return imgs.splice(Math.floor(Math.random() * imgs.length), 1)[0];
   }  
   
   class Game {
     constructor(n1, n2) {
-      this.adultImgs = [...adultImgs];
-      this.kidImgs = [...kidImgs];
-      this.gohstImgs = [...gohstImgs];
-      this.animalImgs = [...animalImgs];
-      this.guestImages = [this.adultImgs, this.kidImgs, this.gohstImgs, this.animalImgs];
+      this.manImgs = [...manImgs];
+      this.womanImgs = [...womanImgs];
+      this.boyImgs = [...boyImgs];
+      this.girlImgs = [...girlImgs];
+      this.guestImages = [this.manImgs, this.womanImgs, this.boyImgs, this.girlImgs];
       this.n1 = n1;
       this.n2 = n2;
       this.catchCount = 0;
-      this.onboardAdults = [];
-      this.onboardKids = [];
-      this.onboardGohsts = [];
-      this.onboardAnimals = [];
-      this.onboardGuests = [this.onboardAdults, this.onboardKids, this.onboardGohsts, this.onboardAnimals];
-      this.getinAdult = undefined;
-      this.getinKid = undefined;
-      this.getingohst = undefined;
-      this.getinAnimal = undefined;
+      this.onboardMen = [];
+      this.onboardWomen = [];
+      this.onboardBoys = [];
+      this.onboardGirls = [];
+      this.onboardGuests = [this.onboardMen, this.onboardWomen, this.onboardBoys, this.onboardGirls];
+      this.getinMan = undefined;
+      this.getinWoman = undefined;
+      this.getinBoy = undefined;
+      this.getinGirl = undefined;
       this.getGuests(this.n1);
     }
     gameOver() {
@@ -75,18 +72,15 @@
       while(answerboard.firstChild) {
         answerboard.removeChild(answerboard.firstChild);
       }
-      const qIndex = Math.floor(Math.random() * 3);
-      question.textContent = `${questions[qIndex].q}は、何${questions[qIndex].c}でしょう?`;
-      console.log(this.onboardAdults.length);
-      console.log(this.onboardKids.length);
-      console.log(this.onboardGohsts.length);
-      console.log(this.onboardAnimals.length);
+      const qIndex = Math.floor(Math.random() * 2);
+      question.textContent = `${questions[qIndex]}は、何人でしょう?`;
+      
       for(let i = 0; i < 10; i++) {
         const div = document.createElement('div');
-        div.textContent = `${i}${questions[qIndex].c}`;
+        div.textContent = `${i}人`;
         answerboard.appendChild(div);
         div.addEventListener('click', () => {
-          if ((qIndex === 0 && i === (this.onboardAdults.length + this.onboardKids.length)) || (qIndex === 1 && i === this.onboardGohsts.length) || (qIndex === 2 && i === this.onboardAnimals.length)) {
+          if ((qIndex === 0 && i === (this.onboardMen.length + this.onboardWomen.length)) || (qIndex === 1 && i === (this.onboardBoys.length + this.onboardGirls.length))) {
             correctCount++;
             question.textContent = '正解！バスに乗っている人は下の人たちだよ。';
           } else {
@@ -117,10 +111,10 @@
         while (guest.firstChild) {
           guest.removeChild(guest.firstChild);
         }
-        this.getinAdult = undefined;
-        this.getinKid = undefined;
-        this.getinGohst = undefined;
-        this.getinAnimal = undefined;
+        this.getinMan = undefined;
+        this.getinWoman = undefined;
+        this.getinBoy = undefined;
+        this.getinGirl = undefined;
         bus.classList.remove('flameout');
         bus.classList.add('hidden');
         if (this.catchCount === Math.floor((correctCount + 2) / 2) + 1) {
@@ -141,35 +135,33 @@
       });
     }
     changeGuests() {
-      setTimeout(() => {
         while (guest.firstChild) {
           guest.removeChild(guest.firstChild);
         }
         this.catchCount++;
         this.setGetoutGuests();
         guest.classList.remove('getin');
-      }, 1000);
     }
     setGuestChange() {
+      guest.classList.add('getin');
       setTimeout(() => {
-        guest.classList.add('getin');
         this.changeGuests();
       }, 1000);
       setTimeout(() => {
         this.leaveBus();
-        if(this.getinAdult) {
-          this.onboardAdults.push(this.getinAdult);
+        if(this.getinMan) {
+          this.onboardMen.push(this.getinMan);
         }
-        if(this.getinKid) {
-          this.onboardKids.push(this.getinKid);
+        if(this.getinWoman) {
+          this.onboardWomen.push(this.getinWoman);
         }
-        if(this.getinGohst) {
-          this.onboardGohsts.push(this.getinGohst);
+        if(this.getinBoy) {
+          this.onboardBoys.push(this.getinBoy);
         }
-        if(this.getinAnimal) {
-          this.onboardAnimals.push(this.getinAnimal);
+        if(this.getinGirl) {
+          this.onboardGirls.push(this.getinGirl);
         }
-      }, 2100);
+      }, 1100);
     }
     getGuests(n) {
       this.guestImages.forEach((images, index) => {
@@ -178,16 +170,16 @@
           img.src = getRandomImg(images);
           switch (index) {
             case 0:
-              this.getinAdult = img.src;
+              this.getinMan = img.src;
               break;
             case 1:
-              this.getinKid = img.src;
+              this.getinWoman = img.src;
               break;
             case 2:
-              this.getinGohst = img.src;
+              this.getinBoy = img.src;
               break;
             case 3:
-              this.getinAnimal = img.src;
+              this.getinGirl = img.src;
               break;
           }
           img.classList.add(guestClass[index]);
@@ -196,7 +188,9 @@
       });
       result.classList.remove('show');
       bus.classList.remove('flamein');
-      this.setGuestChange();
+      setTimeout(() => {
+        this.setGuestChange();
+      }, 1000);
     }
   }
   main.addEventListener('click', () => {
