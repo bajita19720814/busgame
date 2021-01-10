@@ -67,6 +67,7 @@ body {
 }
 .restart span {
   line-height: 32px;
+  transform: rotateY(180deg);
 }
 .replay {
   position: absolute;
@@ -147,8 +148,8 @@ body {
 #answerboard {
   display: flex;
   margin: 32px auto;
-  width: 280px;
-  height: 120px;
+  width: 310px;
+  height: 160px;
   flex-wrap: wrap;
   justify-content: space-between;
   
@@ -156,12 +157,13 @@ body {
 #answerboard div {
   background-color: ghostwhite;
   border-radius: 4px;
-  width: 50px;
-  height: 32px;
+  width: 58px;
+  height: 75px;
   cursor: pointer;
   text-align: center;
-  line-height: 32px;
-  font-size: 20px;
+  line-height: 75px;
+  font-size: 24px;
+  font-weight: bold;
   z-index: 5;
 }
 @media (min-width: 400px) {
@@ -207,12 +209,8 @@ body {
   #answerboard {
     margin: 32px auto;
     width: 380px;
-    height: 120px;
   }
   #answerboard div {
     width: 70px;
-    height: 48px;
-    line-height: 48px;
-    font-size: 20px;
   }
 }

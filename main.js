@@ -14,6 +14,7 @@
   const guestClass = ["adult", "adult", "kid", "kid"];
   let correctCount = 0;
   let wrongCount = 0;
+  let point = 0;
   let isGaming = false;
   const questions = ["大人", "子供"];
   function getRandomImg(imgs) {
@@ -59,7 +60,7 @@
         answerboard.style.justifyContent = 'center';
       });
       setTimeout(() => {
-        if (correctCount < 6 && (correctCount + wrongCount) < 10) {
+        if ((correctCount + wrongCount) < 10) {
           bus.classList.remove('hidden');
           bus.classList.add('flamein');
           new Game(0.7, 0.6);
@@ -74,14 +75,16 @@
       }
       const qIndex = Math.floor(Math.random() * 2);
       question.textContent = `${questions[qIndex]}は、何人でしょう?`;
-      
+      console.log(this.onboardGuests);
       for(let i = 0; i < 10; i++) {
         const div = document.createElement('div');
-        div.textContent = `${i}人`;
+        div.textContent = i;
         answerboard.appendChild(div);
         div.addEventListener('click', () => {
           if ((qIndex === 0 && i === (this.onboardMen.length + this.onboardWomen.length)) || (qIndex === 1 && i === (this.onboardBoys.length + this.onboardGirls.length))) {
             correctCount++;
+            point += this.catchCount;
+            console.log(point);
             question.textContent = '正解！バスに乗っている人は下の人たちだよ。';
           } else {
             wrongCount++;
@@ -117,10 +120,10 @@
         this.getinGirl = undefined;
         bus.classList.remove('flameout');
         bus.classList.add('hidden');
-        if (this.catchCount === Math.floor((correctCount + 2) / 2) + 1) {
+        if (this.catchCount === Math.floor((correctCount + 2) / 3) + 2) {
           this.setQuestion();
         } else {
-            this.startAgain();
+          this.startAgain();
         }
       }, 2000);
     }
